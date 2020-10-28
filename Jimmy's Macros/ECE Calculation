@@ -1,0 +1,58 @@
+Sub Calculate_Current()
+'
+' Calculate_Current Macro
+'
+
+'
+    Application.CutCopyMode = False
+    ActiveCell.Formula2R1C1 = "=RC[-7]:R[18]C[-7]/RC[-6]:R[18]C[-6]"
+    Range("H2").Select
+End Sub
+
+Sub Calculate_Resistance()
+'
+' Calculate_Resistance Macro
+'
+
+'
+    Application.CutCopyMode = False
+    ActiveCell.Formula2R1C1 = "=RC[-8]:R[18]C[-8]/RC[-6]:R[18]C[-6]"
+    Range("I2").Select
+End Sub
+
+Sub Calculate_Voltage()
+'
+' Calculate_Voltage Macro
+'
+
+'
+    ActiveCell.FormulaR1C1 = ""
+    Range("G2").Select
+    Application.CutCopyMode = False
+    ActiveCell.Formula2R1C1 = "=RC[-5]:R[18]C[-5]*RC[-4]:R[18]C[-4]"
+    Range("G2").Select
+End Sub
+
+Sub Convert_Joules()
+'
+' Convert_Joules Macro
+'
+
+'
+    Application.CutCopyMode = False
+    ActiveCell.Formula2R1C1 = "=RC[-13]#*RC[-3]:R[18]C[-3]"
+    Range("Z3").Select
+End Sub
+
+Sub Calculate_Watts()
+'
+' Calculate_Watts Macro
+'
+
+'
+    ActiveCell.Select
+    Application.CutCopyMode = False
+    ActiveCell.Formula2R1C1 = "=RC[-9]:R[18]C[-9]*RC[-10]:R[18]C[-10]"
+    ActiveCell.Offset(1, 0).Range("A1").Select
+End Sub
+
