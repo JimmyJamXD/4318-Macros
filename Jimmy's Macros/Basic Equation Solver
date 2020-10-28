@@ -1,0 +1,97 @@
+Sub Calculate()
+
+Dim j, M, term, Stepsize As Integer
+Dim SumType As String
+
+'New equation to calculate
+'
+
+j = 0
+M = Range("C2").Value
+SumType = Range("C3").Value
+
+Range("A8:B10000").Value = ""
+
+Range("C6").Value = ""
+Select Case SumType
+
+Case Is = "All"
+Stepsize = 1
+Case Is = "Odd"
+Stepsize = 2
+
+Case Else
+
+MsgBox "Enter a valid expression in cell C3"
+
+End
+End Select
+For term = 1 To M Step Stepsize
+
+Cells(8 + j, 1).Value = term
+Cells(8 + j, 2).Value = ((8 * term ^ 2) + (7 * term) + 1) / ((12 * term) - 15)
+
+Range("C6").Value = Range("C6").Value + Cells(8 + j, 2).Value
+j = j + 1
+Next term
+
+
+'
+' Highlight Macro
+'
+
+
+    Selection.FormatConditions.Add Type:=xlCellValue, Operator:=xlLess, _
+        Formula1:="=0"
+    Selection.FormatConditions(Selection.FormatConditions.Count).SetFirstPriority
+    With Selection.FormatConditions(1).Font
+        .Color = -16383844
+        .TintAndShade = 0
+    End With
+    With Selection.FormatConditions(1).Interior
+        .PatternColorIndex = xlAutomatic
+        .Color = 13551615
+        .TintAndShade = 0
+    End With
+    Selection.FormatConditions(1).StopIfTrue = False
+    
+End Sub
+
+Sub Clear()
+Range("C2").Clear
+
+End Sub
+
+Sub Quadratic_Formula()
+Dim A, B, c, det, root1, root2 As Single
+
+A = Cells(4, 9)
+B = Cells(5, 9)
+c = Cells(6, 9)
+
+det = (B * B) - (4 * A * c)
+
+If det > 0 Then
+root1 = (-B + Sqr(det)) / (2 * A)
+root2 = (-B - Sqr(det)) / (2 * A)
+Cells(8, 9) = Round(root1, 2)
+Cells(9, 9) = Round(root2, 2)
+
+ElseIf det = 0 Then
+root1 = (-B) / 2 * A
+Cells(8, 9) = root1
+Cells(9, 9) = root1
+
+Else
+Cells(8, 9) = "No root"
+Cells(9, 9) = "No root"
+End If
+
+End Sub
+
+
+Sub Clear_Qaud()
+Range("I4").Clear
+Range("I5").Clear
+Range("I6").Clear
+End Sub
