@@ -1,0 +1,243 @@
+Sub Making_Complex()
+'
+' Making_Complex Macro
+'
+
+'
+    ActiveCell.FormulaR1C1 = "=COMPLEX(5,5)"
+    Range("A25").Select
+    ActiveCell.FormulaR1C1 = "=COMPLEX(4,-5)"
+    Range("A26").Select
+    ActiveCell.FormulaR1C1 = "=COMPLEX(15,-6)"
+    Range("A27").Select
+    ActiveCell.FormulaR1C1 = "=COMPLEX(-8,-9)"
+    Range("A28").Select
+    ActiveCell.FormulaR1C1 = "=COMPLEX(-6,7)"
+    Range("A29").Select
+    ActiveCell.FormulaR1C1 = "=COMPLEX(3,-9)"
+    Range("A30").Select
+    ActiveCell.FormulaR1C1 = "=COMPLEX(12.2,-4.5)"
+    Range("A31").Select
+    ActiveCell.FormulaR1C1 = "=COMPLEX(-45,35)"
+    Range("A32").Select
+    ActiveCell.FormulaR1C1 = "=COMPLEX(6,-15)"
+    Range("A33").Select
+    ActiveCell.FormulaR1C1 = "=COMPLEX(3,-3)"
+    Range("A34").Select
+    ActiveCell.FormulaR1C1 = "=COMPLEX(2.3,-1.2)"
+    Range("A35").Select
+End Sub
+
+Sub Real_Number_Part()
+'
+' Real_Number_Part Macro
+'
+
+'
+    ActiveCell.FormulaR1C1 = "=IMREAL(RC[-2])"
+    Range("C25").Select
+    ActiveCell.FormulaR1C1 = "=IMREAL(RC[-2])"
+    Range("C26").Select
+    ActiveCell.Formula2R1C1 = "=Imrea"
+    Range("C26").Select
+    ActiveCell.FormulaR1C1 = "=IMREAL(RC[-2])"
+    Range("C27").Select
+    ActiveCell.FormulaR1C1 = "=IMREAL(RC[-2])"
+    Range("C28").Select
+    ActiveCell.FormulaR1C1 = "=IMREAL(RC[-2])"
+    Range("C29").Select
+    ActiveCell.FormulaR1C1 = "=IMREAL(RC[-2])"
+    Range("C30").Select
+    ActiveCell.FormulaR1C1 = "=IMREAL(RC[-2])"
+    Range("C31").Select
+    ActiveCell.FormulaR1C1 = "=IMREAL(RC[-2])"
+    Range("C32").Select
+    ActiveCell.FormulaR1C1 = "=IMREAL(RC[-2])"
+    Range("C33").Select
+    ActiveCell.FormulaR1C1 = "=IMREAL(RC[-2])"
+    Range("C34").Select
+    ActiveCell.FormulaR1C1 = "=IMREAL(RC[-2])"
+    Range("C25").Select
+    ActiveCell.FormulaR1C1 = ""
+    Range("C25").Select
+    ActiveCell.FormulaR1C1 = "=IMREAL(RC[-2])"
+    Range("C26").Select
+End Sub
+
+Sub Imaginary_Number_Part()
+'
+' Imaginary_Number_Part Macro
+'
+'
+Dim rng As Range
+Set rng = Range("D24")
+rng.Name = "Imaginary"
+
+
+    Range("D24").Select
+    ActiveCell.Formula2R1C1 = "=Im"
+    Range("D24").Select
+    ActiveCell.FormulaR1C1 = "=IMAGINARY(RC[-3])"
+    Range("D25").Select
+    ActiveCell.Formula2R1C1 = "=IMA"
+    Range("D25").Select
+    ActiveCell.FormulaR1C1 = "=IMAGINARY(RC[-3])"
+    Range("D26").Select
+    ActiveCell.FormulaR1C1 = "=IMAGINARY(RC[-3])"
+    Range("D27").Select
+    ActiveCell.FormulaR1C1 = "=IMAGINARY(RC[-3])"
+    Range("D28").Select
+    ActiveCell.FormulaR1C1 = "=IMAGINARY(RC[-3])"
+    Range("D29").Select
+    ActiveCell.FormulaR1C1 = "=IMAGINARY(RC[-3])"
+    Range("D30").Select
+    ActiveCell.FormulaR1C1 = "=IMAGINARY(RC[-3])"
+    Range("D31").Select
+    ActiveCell.FormulaR1C1 = "=IMAGINARY(RC[-3])"
+    Range("D32").Select
+    ActiveCell.FormulaR1C1 = "=IMAGINARY(RC[-3])"
+    Range("D33").Select
+    ActiveCell.FormulaR1C1 = "=IMAGINARY(RC[-3])"
+    Range("D34").Select
+    ActiveCell.FormulaR1C1 = "=IMAGINARY(RC[-3])"
+    Range("D35").Select
+End Sub
+
+Sub Real_Number_Squared()
+'
+' Real_Number_Squared Macro
+'
+
+'
+    ActiveCell.FormulaR1C1 = "=RC[-4]^2"
+    Range("G25").Select
+    ActiveCell.FormulaR1C1 = "=RC[-4]^2"
+    Range("G26").Select
+    ActiveCell.FormulaR1C1 = "=RC[-4]^2"
+    Range("G27").Select
+    ActiveCell.FormulaR1C1 = "=RC[-4]^2"
+    Range("G28").Select
+    ActiveCell.FormulaR1C1 = "=RC[-4]^2"
+    Range("G29").Select
+    ActiveCell.FormulaR1C1 = "=RC[-4]^2"
+    Range("G30").Select
+    ActiveCell.FormulaR1C1 = "=RC[-4]^2"
+    Range("G31").Select
+    ActiveCell.FormulaR1C1 = "=RC[-4]^2"
+    Range("G32").Select
+    ActiveCell.FormulaR1C1 = "=RC[-4]^2"
+    Range("G33").Select
+    ActiveCell.FormulaR1C1 = "=RC[-4]^2"
+    Range("G34").Select
+    ActiveCell.FormulaR1C1 = "=RC[-4]^2"
+    Range("H24").Select
+    ActiveCell.FormulaR1C1 = ""
+    Range("F14").Select
+End Sub
+
+Sub Imaginary_Number_Squared()
+'
+' Imaginary_Number_Squared Macro
+'
+
+'
+    Range("H24").Select
+    ActiveCell.FormulaR1C1 = "=RC[-4]^2"
+    Range("H25").Select
+    ActiveCell.FormulaR1C1 = "=RC[-4]^2"
+    Range("H26").Select
+    ActiveCell.FormulaR1C1 = "=RC[-4]^2"
+    Range("H27").Select
+    ActiveCell.FormulaR1C1 = "=RC[-4]^2"
+    Range("H28").Select
+    ActiveCell.FormulaR1C1 = "=RC[-4]^2"
+    Range("H29").Select
+    ActiveCell.FormulaR1C1 = "=RC[-4]^2"
+    Range("H30").Select
+    ActiveCell.FormulaR1C1 = "=RC[-4]^2"
+    Range("H31").Select
+    ActiveCell.FormulaR1C1 = "=RC[-4]^2"
+    Range("H32").Select
+    ActiveCell.FormulaR1C1 = "=RC[-4]^2"
+    Range("H33").Select
+    ActiveCell.FormulaR1C1 = "=RC[-4]^2"
+    Range("H34").Select
+    ActiveCell.FormulaR1C1 = "=RC[-4]^2"
+    Range("H35").Select
+End Sub
+
+Sub Magnitude()
+'
+' Magnitude Macro
+'
+
+'
+    Range("I24").Select
+    ActiveCell.FormulaR1C1 = "=SQRT(RC[-2]+RC[-1])"
+    Range("I25").Select
+    ActiveCell.FormulaR1C1 = "=SQRT(RC[-2]+RC[-1])"
+    Range("I26").Select
+    ActiveCell.FormulaR1C1 = "=SQRT(RC[-2]+RC[-1])"
+    Range("I27").Select
+    ActiveCell.FormulaR1C1 = "=SQRT(RC[-2]+RC[-1])"
+    Range("I28").Select
+    ActiveCell.FormulaR1C1 = "=SQRT(RC[-2]+RC[-1])"
+    Range("I29").Select
+    ActiveCell.FormulaR1C1 = "=SQRT(RC[-2]+RC[-1])"
+    Range("I30").Select
+    ActiveCell.FormulaR1C1 = "=SQRT(RC[-2]+RC[-1])"
+    Range("I31").Select
+    ActiveCell.FormulaR1C1 = "=SQRT(RC[-2]+RC[-1])"
+    Range("I32").Select
+    ActiveCell.FormulaR1C1 = "=SQRT(RC[-2]+RC[-1])"
+    Range("I33").Select
+    ActiveCell.Formula2R1C1 = "=sqrt"
+    Range("I33").Select
+    ActiveCell.FormulaR1C1 = "=SQRT(RC[-2]+RC[-1])"
+    Range("I34").Select
+    ActiveCell.FormulaR1C1 = "=SQRT(RC[-2]+RC[-1])"
+    Range("I35").Select
+End Sub
+
+Sub Polar_Radian()
+'
+' Polar Macro
+'
+
+'
+    Range("K24").Select
+    ActiveCell.FormulaR1C1 = "=ATAN(RC[-7]/RC[-8])"
+    Range("K25").Select
+    ActiveCell.FormulaR1C1 = "=ATAN(RC[-7]/RC[-8])"
+    Range("K26").Select
+    ActiveCell.FormulaR1C1 = "=ATAN(RC[-7]/RC[-8])"
+    Range("K27").Select
+    ActiveCell.FormulaR1C1 = "=ATAN(RC[-7]/RC[-8])"
+    Range("K28").Select
+    ActiveCell.FormulaR1C1 = "=ATAN(RC[-7]/RC[-8])"
+    Range("K29").Select
+    ActiveCell.FormulaR1C1 = "=ATAN(RC[-7]/RC[-8])"
+    Range("K30").Select
+    ActiveCell.FormulaR1C1 = "=ATAN(RC[-7]/RC[-8])"
+    Range("K31").Select
+    ActiveCell.FormulaR1C1 = "=ATAN(RC[-7]/RC[-8])"
+    Range("K32").Select
+    ActiveCell.FormulaR1C1 = "=ATAN(RC[-7]/RC[-8])"
+    Range("K33").Select
+    ActiveCell.FormulaR1C1 = "=ATAN(RC[-7]/RC[-8])"
+    Range("K34").Select
+    ActiveCell.FormulaR1C1 = "=ATAN(RC[-7]/RC[-8])"
+    Range("K35").Select
+End Sub
+
+Sub Polar_Degree()
+'
+' Polar_Degree Macro
+' Converts Radians into Degrees
+'
+
+'
+    Range("A38").Select
+    ActiveCell.Formula2R1C1 = "=DEGREES(R[-14]C[10]:R[-4]C[10])"
+    Range("B46").Select
+End Sub
