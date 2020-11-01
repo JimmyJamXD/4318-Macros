@@ -1,0 +1,207 @@
+Public tmpVar As String
+Public calVal As String
+
+
+Private Sub UserForm1_Initialize()
+TextBox.MaxLenght = 10
+TextDisplay.MaxLength = 10
+    
+End Sub
+
+
+Private Sub Clear_Click()
+TextBox = 0: TextDisplay = Empty
+End Sub
+
+Private Sub cmdBtn0_Click()
+ If TextBox = 0 Then
+    TextBox = cmdBtn0.Caption
+    Else
+    TextBox = TextBox + cmdBtn0.Caption
+    End If
+End Sub
+
+Private Sub cmdBtn1_Click()
+    If TextBox = 0 Then
+    TextBox = cmdBtn1.Caption
+    Else
+    TextBox = TextBox + cmdBtn1.Caption
+    End If
+End Sub
+
+Private Sub cmdBtn2_Click()
+ If TextBox = 0 Then
+    TextBox = cmdBtn2.Caption
+    Else
+    TextBox = TextBox + cmdBtn2.Caption
+    End If
+End Sub
+
+Private Sub cmdBtn3_Click()
+ If TextBox = 0 Then
+    TextBox = cmdBtn3.Caption
+    Else
+    TextBox = TextBox + cmdBtn3.Caption
+    End If
+End Sub
+
+Private Sub cmdBtn4_Click()
+     If TextBox = 0 Then
+    TextBox = cmdBtn4.Caption
+    Else
+    TextBox = TextBox + cmdBtn4.Caption
+    End If
+End Sub
+
+Private Sub cmdBtn5_Click()
+ If TextBox = 0 Then
+    TextBox = cmdBtn5.Caption
+    Else
+    TextBox = TextBox + cmdBtn5.Caption
+    End If
+End Sub
+
+Private Sub cmdBtn6_Click()
+     If TextBox = 0 Then
+    TextBox = cmdBtn6.Caption
+    Else
+    TextBox = TextBox + cmdBtn6.Caption
+    End If
+End Sub
+
+Private Sub cmdBtn7_Click()
+     If TextBox = 0 Then
+    TextBox = cmdBtn7.Caption
+    Else
+    TextBox = TextBox + cmdBtn7.Caption
+    End If
+End Sub
+
+Private Sub cmdBtn8_Click()
+     If TextBox = 0 Then
+    TextBox = cmdBtn8.Caption
+    Else
+    TextBox = TextBox + cmdBtn8.Caption
+    End If
+End Sub
+
+Private Sub cmdBtn9_Click()
+ If TextBox = 0 Then
+    TextBox = cmdBtn9.Caption
+    Else
+    TextBox = TextBox + cmdBtn9.Caption
+    End If
+End Sub
+
+Private Sub cmdBtnAdd_Click()
+   If TextBox <> 0 Then
+        TextDisplay = TextBox
+        TextBox = 0
+        calVal = "Add"
+    End If
+End Sub
+
+Private Sub cmdBtnDegree_Click()
+ If TextBox <> 0 Then
+        TextDisplay = TextBox
+        TextBox = 0
+        calVal = "Degree"
+    End If
+End Sub
+
+Private Sub cmdBtnRadian_Click()
+ If TextBox <> 0 Then
+        TextDisplay = TextBox
+        TextBox = 0
+        calVal = "Degree"
+    End If
+End Sub
+
+
+Private Sub cmdBtnEqual_Click()
+
+On Error GoTo ErrOcccered
+    'Dim txtRes As Long
+    
+    If TextBox <> "" And calVal <> "" Then
+        FNum = val(TextDisplay): SNum = val(TextBox)
+        Select Case calVal
+            Case "Sine"
+                TextBox = Sin(FNum)
+            Case "Cosine"
+                TextBox = Cos(FNum)
+            Case "Tangent"
+                TextBox = Tan(FNum)
+            Case "ArcSine"
+                TextBox = 1 / (Sin(FNum))
+            Case "ArcCosine"
+                TextBox = 1 / (Cos(FNum))
+            Case "ArcTangent"
+                TextBox = 1 / Tan((FNum))
+            Case "Degree"
+                TextBox = (FNum * 180) / 3.141592653897
+            Case "Radian"
+                TextBox = (FNum * (3.141592653897 / 180))
+            Case Else
+                
+        End Select
+        TextDisplay = Empty
+    End If
+ErrOcccered:
+
+End Sub
+
+Private Sub ArcCosine_Click()
+ If TextBox <> 0 Then
+        TextDisplay = TextBox
+        TextBox = 0
+        calVal = "ArcCosine"
+    End If
+End Sub
+
+Private Sub ArcSine_Click()
+ If TextBox <> 0 Then
+        TextDisplay = TextBox
+        TextBox = 0
+        calVal = "ArcSine"
+    End If
+End Sub
+
+Private Sub ArcTangent_Click()
+ If TextBox <> 0 Then
+        TextDisplay = TextBox
+        TextBox = 0
+        calVal = "ArcTangent"
+    End If
+End Sub
+
+Private Sub Cosine_Click()
+If TextBox <> 0 Then
+        TextDisplay = TextBox
+        TextBox = 0
+        calVal = "Cosine"
+    End If
+End Sub
+Private Sub Sine_Click()
+ If TextBox <> 0 Then
+        TextDisplay = TextBox
+        TextBox = 0
+        calVal = "Sine"
+    End If
+End Sub
+
+Private Sub Tangent_Click()
+If TextBox <> 0 Then
+        TextDisplay = TextBox
+        TextBox = 0
+        calVal = "Tangent"
+    End If
+End Sub
+
+Private Sub UserForm_Click()
+ If TextBox <> 0 Then
+        TextDisplay = TextBox
+        TextBox = 0
+        calVal = "Cosine"
+    End If
+End Sub
