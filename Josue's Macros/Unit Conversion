@@ -1,0 +1,81 @@
+Sub unitConverter()
+    Dim myRange As Range, unitData() As String, desiredUnit As String
+    Dim temp As String
+    
+    If TypeName(Selection) = "Range" Then
+        Set myRange = Selection
+    Else
+        Exit Sub
+    End If
+    
+    desiredUnit = Split(myRange.Cells(RowIndex:=1))(1)
+    
+    For i = 2 To myRange.Rows.Count
+        unitData() = Split(myRange.Cells(RowIndex:=i))
+        temp = convUnit(CDbl(unitData(0)), unitData(1), desiredUnit)
+        
+        If CDbl(temp) > 10000 Or CDbl(temp) < 0.001 Then
+            temp = Format(temp, "Scientific")
+        Else
+            temp = CStr(Round(temp, 3))
+        End If
+        
+        If temp <> 0 Then
+            myRange.Cells(RowIndex:=i, ColumnIndex:=2) = temp & " " & desiredUnit
+        End If
+    Next i
+    
+    MsgBox ("Converted All Units To: " & desiredUnit)
+    
+End Sub
+
+Public Function convUnit(value As Double, unit As String, desUnit As String) As Double
+    Dim inputUnitType As String
+    Dim desiredUnitType As String
+    
+    inputUnitType = checkUnitType(unit)
+    desireUnitType = checkUnitType(desUnit)
+    
+    If inputUnitType = desireUnitType Then
+        convUnit = WorksheetFunction.Convert(value, unit, desUnit)
+    Else
+        MsgBox "Unit " & unit & " is incompatible with unit " & desUnit
+        convUnit = 0
+    End If
+    
+End Function
+
+Public Function checkUnitType(unit As String) As String
+    
+    Select Case unit
+    
+    Case "in", "ft", "yd", "mi", "m", "mi", "ang"
+        checkUnitType = "distance"
+    Case "oz", "gal", "L", "l", "tsp", "tbs", "cup", "pt", "qt", "barrel", "ft^3", "yd^3", "m^3", "mi^3", "in^3"
+        checkUnitType = "volume"
+    Case "in^2", "ft^2", "yd^2", "mi^2", "m^2", "ha", "us_acre", "ang^2"
+        checkUnitType = "area"
+    Case "lbm", "sg", "g", "ozm", "ton", "u"
+        checkUnitType = "mass"
+    Case "yr", "day", "d", "hr", "min", "mn", "sec", "s"
+        checkUnitType = "time"
+    Case "Pa", "p", "atm", "mmHg", "psi", "Torr"
+        checkUnitType = "pressure"
+    Case "N", "dyn", "dy", "lbf"
+        checkUnitType = "force"
+    Case "J", "e", "c", "cal", "eV", "ev", "HPh", "hh", "Wh", "wh"
+        checkUnitType = "energy"
+    Case "HP", "h", "W", "w"
+        checkUnitType = "power"
+    Case "m/h", "m/hr", "m/s", "m/sec"
+        checkUnitType = "speed"
+    Case "C", "F", "K"
+        checkUnitType = "temperature"
+    Case "T", "ga"
+        checkUnitType = "magnetism"
+    Case "bit", "byte"
+        checkUnitType = "information"
+    
+    End Select
+    
+End Function
