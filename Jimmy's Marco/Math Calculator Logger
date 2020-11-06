@@ -1,0 +1,156 @@
+
+Private Sub cmdAdd_Click()
+Dim Name As String
+Dim i As Integer
+
+Dim CurrentCell As Range
+Set CurrentCell = Worksheets("Sheet4").Range("A2")
+
+While CurrentCell <> ""
+Set CurrentCell = CurrentCell.Offset(1, 0)
+Wend
+
+CurrentCell.Value = val(ValBox)
+Set CurrentCell = CurrentCell.Offset(0, 1)
+CurrentCell.Value = " + "
+Set CurrentCell = CurrentCell.Offset(0, 1)
+CurrentCell.Value = val(ValBox2)
+Set CurrentCell = CurrentCell.Offset(0, 1)
+CurrentCell.Value = " = "
+Set CurrentCell = CurrentCell.Offset(0, 1)
+CurrentCell.Value = val(ValBox) + val(ValBox2)
+
+
+AnswerBox = val(ValBox) + val(ValBox2)
+End Sub
+
+Private Sub cmdDivide_Click()
+
+Dim CurrentCell As Range
+Set CurrentCell = Worksheets("Sheet4").Range("G2")
+
+While CurrentCell <> ""
+Set CurrentCell = CurrentCell.Offset(7, 0)
+Wend
+
+CurrentCell.Value = val(ValBox)
+Set CurrentCell = CurrentCell.Offset(0, 1)
+CurrentCell.Value = " / "
+Set CurrentCell = CurrentCell.Offset(0, 1)
+CurrentCell.Value = val(ValBox2)
+Set CurrentCell = CurrentCell.Offset(0, 1)
+CurrentCell.Value = " = "
+Set CurrentCell = CurrentCell.Offset(0, 1)
+CurrentCell.Value = val(ValBox) / val(ValBox2)
+
+MsgBox CurrentCell
+AnswerBox = val(ValBox) / val(ValBox2)
+End Sub
+
+Private Sub cmdExp_Click()
+
+Dim CurrentCell As Range
+Set CurrentCell = Worksheets("Sheet4").Range("M1")
+
+While CurrentCell <> ""
+Set CurrentCell = CurrentCell.Offset(1, 0)
+Wend
+
+CurrentCell = "Exp( " & vbCr & val(ValBox) & ")"
+Set CurrentCell = CurrentCell.Offset(0, 1)
+CurrentCell.Value = " = "
+Set CurrentCell = CurrentCell.Offset(0, 1)
+CurrentCell.Value = Exp(val(ValBox))
+
+AnswerBox = Exp(val(ValBox))
+End Sub
+
+Private Sub cmdLog_Click()
+
+Dim CurrentCell As Range
+Set CurrentCell = Worksheets("Sheet4").Range("A1")
+
+While CurrentCell <> ""
+Set CurrentCell = CurrentCell.Offset(1, 0)
+Wend
+
+CurrentCell = " Log ( " & vbCr & val(ValBox) & ")"
+Set CurrentCell = CurrentCell.Offset(0, 1)
+CurrentCell.Value = " = "
+Set CurrentCell = CurrentCell.Offset(0, 1)
+CurrentCell.Value = Log(val(ValBox))
+
+AnswerBox = Log(val(ValBox))
+End Sub
+
+Private Sub cmdMultiply_Click()
+
+Dim CurrentCell As Range
+Set CurrentCell = Worksheets("Sheet4").Range("A1")
+
+While CurrentCell <> ""
+Set CurrentCell = CurrentCell.Offset(1, 0)
+Wend
+
+CurrentCell.Value = val(ValBox)
+Set CurrentCell = CurrentCell.Offset(0, 1)
+CurrentCell.Value = " * "
+Set CurrentCell = CurrentCell.Offset(0, 1)
+CurrentCell.Value = val(ValBox2)
+Set CurrentCell = CurrentCell.Offset(0, 1)
+CurrentCell.Value = " = "
+Set CurrentCell = CurrentCell.Offset(0, 1)
+CurrentCell.Value = val(ValBox) * val(ValBox2)
+
+AnswerBox = val(ValBox) * val(ValBox2)
+End Sub
+
+Private Sub cmdSubtract_Click()
+
+Dim CurrentCell As Range
+Set CurrentCell = Worksheets("Sheet4").Range("A1")
+
+While CurrentCell <> ""
+Set CurrentCell = CurrentCell.Offset(1, 0)
+Wend
+
+CurrentCell.Value = val(ValBox)
+Set CurrentCell = CurrentCell.Offset(0, 1)
+CurrentCell.Value = " - "
+Set CurrentCell = CurrentCell.Offset(0, 1)
+CurrentCell.Value = val(ValBox2)
+Set CurrentCell = CurrentCell.Offset(0, 1)
+CurrentCell.Value = " = "
+Set CurrentCell = CurrentCell.Offset(0, 1)
+CurrentCell.Value = val(ValBox) - val(ValBox2)
+
+End Sub
+
+Private Sub cmdClear_Click()
+
+Dim i As Integer
+Dim TempCell As Range
+Dim CurrentCell As Range
+Set CurrentCell = Worksheets("Sheet4").Range("A2")
+
+Dim Counter As Integer
+Counter = 0
+While CurrentCell <> ""
+Counter = Counter + 1
+Set CurrentCell = CurrentCell.Offset(1, 0)
+Wend
+
+Set CurrentCell = Worksheets("Sheet4").Range("A1")
+For i = 0 To Counter
+Set TempCell = CurrentCell
+
+While TempCell <> ""
+TempCell = ""
+Set TempCell = TempCell.Offset(0, 1)
+Wend
+
+Set CurrentCell = CurrentCell.Offset(1, 0)
+
+Next i
+ValBox = Empty: ValBox2 = Empty: AnswerBox = Empty
+End Sub
