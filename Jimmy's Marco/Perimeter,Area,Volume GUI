@@ -1,0 +1,109 @@
+
+Private Sub cmdClear_Click()
+
+ABox = Empty: BBox = Empty: CBox = Empty: DBox = Empty:
+RadiusBox = Empty: HBox = Empty: ValueBox = Empty: AnswerBox = Empty
+
+End Sub
+
+Private Sub cmdParallelogram_Click()
+    If optPerimeter.Value = True Then
+    MsgBox "The formula for a perimeter of a Parallelogram is 2 * (A + B) side"
+    AnswerBox = 2 * (val(ABox) + val(BBox))
+    
+   ElseIf optArea.Value = True Then
+   MsgBox "The area formula of a Parallelogram is base*height" & vbNewLine & "You'll need A and Height side"
+   AnswerBox = val(ABox) * val(HBox)
+    
+End Sub
+
+Private Sub cmdRectangle_Click()
+    If optPerimeter.Value = True Then
+    MsgBox "The formula for a perimeter of a Rectangle is 2*length + 2*width" & vbNewLine & "You need A side and a B side"
+    AnswerBox = 2 * val(ABox) + 2 * val(BBox)
+    
+    ElseIf optArea.Value = True Then
+    MsgBox "The formula for an Area of a Rectangle is length * width" & vbNewLine & "You need A side and a B side"
+    AnswerBox = 2 * val(ABox) + 2 * val(BBox)
+    
+    End If
+End Sub
+
+Private Sub cmdSquare_Click()
+
+    If optPerimeter.Value = True Then
+    MsgBox "The formula for a perimeter of a Square is 4 * sides" & vbNewLine & "You need A side"
+    AnswerBox = 4 * val(ABox)
+    
+    ElseIf optArea.Value = True Then
+    MsgBox "The formula for an area of a Square is A^2 " & vbNewLine & "You need A side"
+    AnswerBox = (val(ABox) + val(BBox)) / 2 * val(HBox)
+    
+    End If
+End Sub
+
+Private Sub cmdTrapezoid_Click()
+    If optPerimeter.Value = True Then
+    MsgBox "The formula for a perimeter of a Trapezoid is A + B + C + D side" & vbNewLine & "You need A, B, C and D Box is needed"
+    AnswerBox = val(ABox) + val(BBox) + val(CBox) + val(DBox)
+    
+    ElseIf optArea.Value = True Then
+    MsgBox "The formula for an area of a Trapezoid is (A + B)/2 * H" & vbNewLine & "You need A, B and Height side"
+    AnswerBox = (val(ABox) + val(BBox)) / 2 * val(HBox)
+    
+    End If
+End Sub
+
+Private Sub cmdTriangle_Click()
+
+    If optPerimeter.Value = True Then
+    MsgBox "The formula for a perimeter of a Triangle is A + B + C side" & vbNewLine & "Needs A, B and C side"
+    AnswerBox = val(ABox) + val(BBox) + val(CBox)
+    
+    ElseIf optArea.Value = True Then
+    MsgBox "The formula for an Area of a Triangle is 1/2*b*h" & vbNewLine & "You need A and Height side"
+    AnswerBox = 1 / 2 * val(ABox) * val(HBox)
+    
+    End If
+    
+End Sub
+
+Private Sub cmdCircle_Click()
+    
+    If optPerimeter.Value = True Then
+    MsgBox "The formula for a perimeter of a Circle is 2 * pi * radius"
+    AnswerBox = 2 * 3.14159265359 * val(RadiusBox)
+    
+    ElseIf optArea.Value = True Then
+    MsgBox "The formula for an Area of a Cricle is pi*Radius^2" & vbNewLine & "You need Radius"
+    AnswerBox = 3.14159265359 * val(RadiusBox) * val(RadiusBox)
+    
+    End If
+End Sub
+
+Private Sub cmdCube_Click()
+    MsgBox "The volume of a cube is A side^3"
+    AnswerBox = val(ABox) * val(ABox) * val(ABox)
+End Sub
+
+Private Sub cmdRectanglePrism_Click()
+    MsgBox "The volume of a Rectangle Prism is length * width * height: used A, B, Height "
+    AnswerBox = val(ABox) * val(BBox) * val(HeightBox)
+End Sub
+
+Private Sub cmdCylinder_Click()
+    MsgBox "The volume of Cylinder is Pi*R^2*H" & vbNewLine & "You need Radius & Height"
+    AsnwerBox = 3.14159265359 * val(RadiusBox) * val(RadiusBox) * val(HBox)
+End Sub
+
+Private Sub cmdPyramid_Click()
+    MsgBox "The volume of Cylinder is Pi*R^2*H" & vbNewLine & "You need A side & Height"
+    AsnwerBox = 1 / 3 * val(ABox) * val(HBox)
+End Sub
+
+Private Sub cmdSphere_Click()
+    MsgBox "The volume of Sphere is 4/3*pi*r^3" & vbNewLine & "You'll need Radius"
+    AnswerBox = 4 / 3 * 3.14159265359 * val(RadiusBox) * val(RadiusBox) * val(RadiusBox)
+    
+End Sub
+
