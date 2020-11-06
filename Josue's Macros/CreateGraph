@@ -1,0 +1,124 @@
+Sub CreateChart()
+    Dim newStart As Integer
+    Dim lastRow As Integer
+    Dim chartData As Range
+    Dim chartPlot As Range
+    Dim chartObj As Object
+    Dim chrt As Chart
+    Dim chartType As String
+    Dim markers As Boolean
+    Dim objTrendline As Trendline
+    Dim x_val As String
+    Dim y_val As String
+    Dim i As Integer
+    Dim j As Integer
+    
+    markers = True
+    
+    Set chartData = Selection
+    newStart = 3
+    lastRow = chartData.Rows.Count
+    Set chartPlot = Range(chartData.Cells(newStart, 1), chartData.Cells(lastRow, 2))
+    
+    Set chartObj = ActiveSheet.Shapes.AddChart2
+    chartObj.Height = 350
+    chartObj.Width = 550
+    
+    With chartObj.Chart
+        .SetSourceData Source:=chartPlot
+        chartType = UCase(chartData(RowIndex:=1, ColumnIndex:=2))
+        .ChartArea.Font.size = 10
+        
+        Select Case chartType
+        Case "SCATTER"
+            .chartType = xlXYScatter
+        Case "SCATTER SMOOTH"
+            .chartType = xlXYScatterSmooth
+        Case "SCATTER LINES"
+            .chartType = xlXYScatterLines
+        Case "SCATTER LINES NO MARKERS"
+            markers = False
+            .chartType = xlXYScatterLinesNoMarkers
+        Case "SCATTER SMOOTH NO MARKERS"
+            markers = False
+            .chartType = xlXYScatterSmoothNoMarkers
+        Case "LINE"
+            markers = False
+            .chartType = xlLine
+        Case "LINE MARKERS"
+            .chartType = xlLineMarkers
+        Case Else
+            .chartType = xlXYScatterLines
+        End Select
+        
+        .HasTitle = True
+        .ChartTitle.Text = chartData(RowIndex:=1, ColumnIndex:=1)
+        .ChartTitle.Font.Bold = True
+        .ChartTitle.Font.size = 20
+        .SeriesCollection(1).Delete
+        .Legend.LegendEntries(1).Delete
+        
+        With .Axes(xlValue)
+            .HasTitle = True
+            .AxisTitle.Orientation = 0
+            .AxisTitle.Text = chartData(RowIndex:=2, ColumnIndex:=1)
+            .AxisTitle.Font.size = 12
+            .AxisTitle.Left = 1
+            .TickLabels.Font.Italic = True
+            .HasMajorGridlines = True
+            .MajorGridlines.Border.Color = RGB(192, 192, 192)
+            .MajorGridlines.Border.LineStyle = xlDash
+        End With
+        
+        With .Axes(xlCategory)
+            .HasTitle = True
+            .AxisTitle.Text = chartData(RowIndex:=2, ColumnIndex:=2)
+            .AxisTitle.Orientation = 0
+            .AxisTitle.Font.size = 12
+            .TickLabels.Font.Italic = True
+            .HasMajorGridlines = True
+            .MajorGridlines.Border.Color = RGB(192, 192, 192)
+            .MajorGridlines.Border.LineStyle = xlDash
+        End With
+        
+        If markers Then
+            .SetElement (msoElementDataLabelCenter)
+            
+            With .SeriesCollection(1)
+                .Format.Line.ForeColor.RGB = RGB(150, 150, 213)
+                .Format.Fill.ForeColor.RGB = RGB(120, 120, 183)
+                
+                For i = 1 To .DataLabels.Count
+                    x_val = chartPlot(RowIndex:=i, ColumnIndex:=1)
+                    y_val = chartPlot(RowIndex:=i, ColumnIndex:=2)
+                
+                    If x_val > 100000 Then
+                        x_val = Format(CDbl(x_val), "Scientific")
+                    End If
+                    
+                    If y_val > 100000 Then
+                        y_val = Format(CDbl(y_val), "Scientific")
+                    End If
+                
+                    .DataLabels(i).Text = "(" & x_val & "," & y_val & ")"
+                    .DataLabels(i).Left = .DataLabels(i).Left + 15
+                    .DataLabels(i).Top = .DataLabels(i).Top + 5
+                Next i
+            End With
+        Else
+            With .SeriesCollection(1)
+                .Format.Line.ForeColor.RGB = RGB(150, 150, 213)
+                .Format.Fill.ForeColor.RGB = RGB(120, 120, 183)
+            End With
+        End If
+        
+        .SeriesCollection(1).Trendlines.Add
+        
+        Set objTrendline = .SeriesCollection(1).Trendlines(1)
+        With objTrendline
+            .DisplayRSquared = False
+            .DisplayEquation = True
+        End With
+    End With
+End Sub
+
