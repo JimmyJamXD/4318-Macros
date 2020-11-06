@@ -1,0 +1,227 @@
+Sub MatrixSolver()
+
+Dim found As Range
+Dim matrix1 As Variant
+Dim matrix2 As Variant
+Dim matrixFinal As Variant
+Dim matrix1Address As Range
+Dim matrix2Address As Range
+Dim matrix1Name As String
+Dim matrix2Name As String
+Dim inputTxt As String
+Dim searchTxt() As String
+Dim functionName As String
+Dim procName As String
+Dim size1() As Integer
+Dim size2() As Integer
+Dim tempCell As Range
+Dim det As Double
+
+With Worksheets(1)
+    Set found = Selection
+    If found <> "" Then
+        If found.Offset(1, 1) <> "" Then
+            searchTxt = Split(found.Offset(1, 1), "x")
+            For i = 0 To CInt(searchTxt(1)) + 1
+                For j = 1 To CInt(searchTxt(0)) + 1
+                    found.Offset(j, i) = ""
+                Next j
+            Next i
+        End If
+        
+        found.Offset(0, 1) = ""
+    
+        searchTxt = Split(found, "(")
+        functionName = searchTxt(0)
+        
+        If functionName <> "det" And functionName <> "trans" Then
+            searchTxt = Split(searchTxt(1), ",")
+            matrix1Name = searchTxt(0)
+            searchTxt = Split(searchTxt(1), ")")
+            matrix2Name = searchTxt(0)
+        Else
+            searchTxt = Split(searchTxt(1), ")")
+            matrix1Name = searchTxt(0)
+        End If
+        
+        Set matrix1Address = .Range("A1").Find(matrix1Name)
+        If matrix1Address = "" Then
+            MsgBox matrix1Address & " " & matrix1Name
+            Set matrix1Address = .Range("A1:AC50").Find(matrix1Name)
+        End If
+        
+        If matrix1Address <> "" And matrix1Address.Offset(0, 1) <> "" Then
+            size1 = getArraySize(matrix1Address.Offset(0, 1))
+            matrix1 = createMatrix(matrix1Address.Offset(0, 1))
+        Else
+            MsgBox "Array " & matrix1Name & " could not be found or is empty"
+        End If
+        
+        Set matrix2Address = .Range("A1:AC50").Find(matrix2Name)
+        
+        If matrix2Address <> "" And matrix2Address.Offset(0, 1) <> "" And functionName <> "det" And functionName <> "trans" Then
+            size2 = getArraySize(matrix2Address.Offset(0, 1))
+            matrix2 = createMatrix(matrix2Address.Offset(0, 1))
+        ElseIf functionName <> "det" And functionName <> "trans" Then
+            MsgBox "Array " & matrix2Name & " could not be found or is empty"
+        End If
+        
+        Select Case functionName
+        Case "det"
+            If size1(0) = size1(1) Then
+                det = findDeterminant(matrix1)
+            Else
+                MsgBox "Matrix is not square, determinant cannot be found"
+            End If
+        Case "mul"
+            If size1(0) = size2(1) Then
+                matrixFinal = findProduct(matrix1, matrix2)
+                procName = matrix1Name & " x " & matrix2Name
+            Else
+                MsgBox "Incorrect Dimensions, Number of columns of Matrix " & matrix1Name & " must equal rows of Matrix " & matrix2Name
+            End If
+        Case "sub"
+            If size1(0) = size2(0) And size1(1) = size2(1) Then
+                matrixFinal = findSubSum(matrix1, matrix2)
+                procName = matrix1Name & " - " & matrix2Name
+            Else
+                MsgBox "Matrix dimensions are not equal"
+            End If
+        Case "add"
+            If size1(0) = size2(0) And size1(1) = size2(1) Then
+                matrixFinal = findSum(matrix1, matrix2)
+                procName = matrix1Name & " + " & matrix2Name
+            Else
+                MsgBox "Matrix dimensions are not equal"
+            End If
+        Case "trans"
+                matrixFinal = findTranspose(matrix1)
+                procName = "transpose(" & matrix1Name & ")"
+        Case Else
+            MsgBox "Function " & functionName + " does not exist"
+        End Select
+    Else
+        MsgBox "Selected Invalid Cell"
+    End If
+    
+    If functionName = "det" Then
+        found.Offset(0, 1) = det
+    ElseIf IsEmpty(matrixFinal) Then
+        MsgBox "Resulting Matrix is Empty"
+    Else
+        found.Offset(1, 1) = CStr(UBound(matrixFinal, 2)) & " x " & CStr(UBound(matrixFinal, 1))
+        found.Offset(2, 0) = procName
+        
+        For i = 1 To UBound(matrixFinal, 1)
+            For j = 1 To UBound(matrixFinal, 2)
+                found.Offset(j + 1, i) = matrixFinal(i, j)
+            Next j
+        Next i
+    End If
+End With
+
+End Sub
+Public Function createMatrix(addr As Range) As Variant
+Dim size() As Integer
+
+size = getArraySize(addr)
+ReDim matrix(1 To size(0), 1 To size(1)) As Double
+
+For i = 0 To (size(0) - 1)
+    For j = 0 To (size(1) - 1)
+        matrix(i + 1, j + 1) = CDbl(addr.Offset(j, i))
+    Next j
+Next i
+
+createMatrix = matrix
+
+End Function
+Public Function getArraySize(addr As Range) As Variant
+Dim arraySize(1) As Integer
+Dim col As Integer
+Dim row As Integer
+Dim rowAddr As Range
+Dim colAddr As Range
+
+col = 0
+Set colAddr = addr
+
+While colAddr <> ""
+    Set rowAddr = colAddr.Offset(1, 0)
+    col = col + 1
+    row = 1
+    While rowAddr <> ""
+        Set rowAddr = rowAddr.Offset(1, 0)
+        row = row + 1
+    Wend
+    Set colAddr = colAddr.Offset(0, 1)
+Wend
+
+arraySize(0) = col
+arraySize(1) = row
+
+getArraySize = arraySize
+
+End Function
+Public Function findSum(m1 As Variant, m2 As Variant) As Variant
+    ReDim mFinal(1 To UBound(m1, 1), 1 To UBound(m1, 2)) As Double
+    
+    For i = 1 To UBound(m1, 1)
+        For j = 1 To UBound(m1, 2)
+            mFinal(i, j) = CDbl(m1(i, j)) + CDbl(m2(i, j))
+        Next j
+    Next i
+    
+    findSum = mFinal
+    
+End Function
+Public Function findProduct(m1 As Variant, m2 As Variant) As Variant
+    ReDim mFinal(1 To UBound(m1, 2), 1 To UBound(m2, 1)) As Double
+    Dim temp As Double
+    
+    temp = 0
+    
+    For i = 1 To UBound(m1, 2)
+        For j = 1 To UBound(m1, 2)
+            For k = 1 To UBound(m2, 2)
+                temp = temp + CDbl(m1(k, i)) * CDbl(m2(j, k))
+            Next k
+            mFinal(j, i) = temp
+            temp = 0
+        Next j
+    Next i
+    
+    findProduct = mFinal
+    
+End Function
+Public Function findSubSum(m1 As Variant, m2 As Variant) As Variant
+    ReDim mFinal(1 To UBound(m1, 1), 1 To UBound(m1, 2)) As Double
+    
+    For i = 1 To UBound(m1, 1)
+        For j = 1 To UBound(m1, 2)
+            mFinal(i, j) = CDbl(m1(i, j)) + (CDbl(m2(i, j)) * -1)
+        Next j
+    Next i
+    
+    findSubSum = mFinal
+    
+End Function
+
+Public Function findTranspose(m1 As Variant) As Variant
+    ReDim mFinal(1 To UBound(m1, 2), 1 To UBound(m1, 1)) As Double
+    
+    For i = 1 To UBound(mFinal, 1)
+        For j = 1 To UBound(mFinal, 2)
+            mFinal(i, j) = m1(j, i)
+        Next j
+    Next i
+    
+    findTranspose = mFinal
+    
+End Function
+
+Public Function findDeterminant(m1 As Variant) As Double
+    
+    findDeterminant = WorksheetFunction.MDeterm(m1)
+    
+End Function
